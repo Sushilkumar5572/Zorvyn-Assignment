@@ -1,7 +1,10 @@
-const express = require('express');
+// Routes for health check
+import express from 'express';
+
 const router = express.Router();
-const { healthCheck } = require('../controllers/health.controller');
 
-router.get('/health', healthCheck);
+router.get('/health', (req, res) => {
+    res.status(200).json({ status: 'OK', message: 'API is healthy' });
+});
 
-module.exports = router;
+export default router;
