@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
-import healthRoute from './routes/health.route.js';
-import authRoute from './routes/auth.route.js';
 import morgan from 'morgan';
 
+import healthRoute from './routes/health.route.js';
+import authRoute from './routes/auth.route.js';
+import recordRoute from './routes/record.route.js';
 
 const app = express();
 
@@ -17,17 +18,8 @@ app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
 
-import authMiddleware from './middlewares/auth.middleware.js';
-import roleMiddleware from './middlewares/role.middleware.js';
-
-app.get('/api/protected', authMiddleware, roleMiddleware('VIEWER'), (req, res) => {
-  res.json({
-    message: 'You accessed protected route',
-    user: req.user
-  });
-});
-
 app.use('/api', healthRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/records', recordRoute);
 
 export default app;
