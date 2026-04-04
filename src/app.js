@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 
-import healthRoute from './routes/health.route.js';
+import testRoute from './routes/test.route.js';
 import authRoute from './routes/auth.route.js';
 import recordRoute from './routes/record.route.js';
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the API');
 });
 
-app.use('/api', healthRoute);
+app.use('/api', testRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/records', recordRoute);
 
