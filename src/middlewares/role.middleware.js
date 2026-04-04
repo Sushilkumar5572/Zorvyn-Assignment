@@ -1,7 +1,7 @@
 // Middleware for role-based access control
 import User from '../models/User.model.js';
 
-const roleMiddleware = (...allowedRoles) => {
+const roleMiddleware = (allowedRoles) => {
     return async (req, res, next) => {
         try {
             const user = await User.findById(req.user._id);
