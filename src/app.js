@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import testRoute from './routes/test.route.js';
 import authRoute from './routes/auth.route.js';
 import recordRoute from './routes/record.route.js';
+import errorMiddleware from './middlewares/error.middleware.js';
 
 const app = express();
 
@@ -21,5 +22,8 @@ app.get('/', (req, res) => {
 app.use('/api', testRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/records', recordRoute);
+
+// Error handling middleware
+app.use(errorMiddleware);
 
 export default app;
