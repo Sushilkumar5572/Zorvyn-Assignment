@@ -1,5 +1,6 @@
 // User Model
 import mongoose from 'mongoose';
+import { ROLES } from '../constants/role.constant.js';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -17,8 +18,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['ADMIN', 'VIEWER', 'ANALYST'],
-        default: 'VIEWER',
+        enum: ROLES,
+        default: ROLES.VIEWER,
     },
     status: {
         type: String,
