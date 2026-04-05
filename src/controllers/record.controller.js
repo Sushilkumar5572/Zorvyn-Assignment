@@ -1,5 +1,4 @@
 // Record controller functions
-import Record from '../models/Record.model.js';
 import { createRecord, getAllRecords, getRecordById, updateRecord, deleteRecord } from '../services/record.service.js';
 import asyncHandler from '../utils/asyncHandler.js';
 
