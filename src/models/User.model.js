@@ -1,6 +1,7 @@
 // User Model
 import mongoose from 'mongoose';
 import { ROLES } from '../constants/role.constant.js';
+import { STATUS } from '../constants/status.constant.js';
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -23,8 +24,8 @@ const userSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['ACTIVE', 'INACTIVE'],
-        default: 'ACTIVE',
+        enum: STATUS,
+        default: STATUS.ACTIVE,
     },
 }, { timestamps: true });
 

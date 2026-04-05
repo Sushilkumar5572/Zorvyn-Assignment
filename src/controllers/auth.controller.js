@@ -1,26 +1,13 @@
 // Controller for authentication
-import User from '../models/User.model.js';
 import bcrypt from 'bcryptjs';
 import generateToken from '../utils/generateToken.js';
 import asyncHandler from '../utils/asyncHandler.js';
+import { createUser, getUserByEmail } from '../services/user.service.js';
 
 export const register = asyncHandler(async (req, res) => {
-    const { name, email, password } = req.body;
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-        return res.status(400).json({ message: 'User already exists' });
-    }
-
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new user
-    const newUser = new User({ name, email, password: hashedPassword });
-    await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully' });
+    const newUser = await createUser(req.body);
+    res.status(201).json({ message: 'User registered successfully', user: newUser });
 
 });
 
@@ -28,7 +15,8 @@ export const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await getUserByEmail(email);
+
     if (!user) {
         return res.status(400).json({ message: 'Invalid credentials' });
     }

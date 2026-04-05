@@ -1,16 +1,26 @@
 // Routes for records
 import express from 'express';
-import { getRecords, createRecord, updateRecord, deleteRecord } from '../controllers/record.controller.js';
-import authMiddleware from '../middlewares/auth.middleware.js';
-import allowedRoles from '../middlewares/role.middleware.js';
+import {
+    createRecordController,
+    getRecordsController,
+    getRecordByIdController,
+    updateRecordController,
+    deleteRecordController
+} from '../controllers/record.controller.js';
+import authenticate from '../middlewares/auth.middleware.js';
+import authorize from '../middlewares/role.middleware.js';
+import activeUser from '../middlewares/status.middleware.js';
 
 const router = express.Router();
 
-router.use(authMiddleware);
+router.use(authenticate);
+router.use(activeUser);
 
-router.post('/', allowedRoles(['ADMIN']), createRecord);
-router.get('/', allowedRoles(['ADMIN', 'ANALYST']), getRecords);
-router.put('/:id', allowedRoles(['ADMIN']), updateRecord);
-router.delete('/:id', allowedRoles(['ADMIN']), deleteRecord);
+
+router.post('/', authorize(['ADMIN']), createRecordController);
+router.get('/', authorize(['ADMIN', 'ANALYST']), getRecordsController);
+router.get('/:id', authorize(['ADMIN', 'ANALYST']), getRecordByIdController);
+router.put('/:id', authorize(['ADMIN']), updateRecordController);
+router.delete('/:id', authorize(['ADMIN']), deleteRecordController);
 
 export default router;

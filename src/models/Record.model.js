@@ -1,5 +1,6 @@
 // Model for records
 import mongoose from 'mongoose';
+import { TYPE } from '../constants/recordType.constant.js';
 
 const recordSchema = new mongoose.Schema({
     userId: {
@@ -13,7 +14,7 @@ const recordSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        enum: ['INCOME', 'EXPENSE'],
+        enum: TYPE,
         required: true,
     },
     category: {
