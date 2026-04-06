@@ -13,8 +13,9 @@ https://zorvyn-assignment-sushilkumar.onrender.com
 ## 📘 API Docs
 https://zorvyn-assignment-sushilkumar.onrender.com/api-docs
 
-# Admin access
+## Admin access
 Admin Email: admin@example.com
+
 Admin Password: admin123
 
 ---
