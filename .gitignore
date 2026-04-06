@@ -1,2 +1,4 @@
 node_modules/
 .env
+src/routes/test.route.js
+src/controllers/test.controller.js

@@ -11,7 +11,7 @@ import {
 export const getSummaryController = asyncHandler(async (req, res) => {
     const data = await getSummary();
 
-    res.json(data);
+    res.json({ message: 'Financial summary retrieved successfully', data });
 });
 
 // Get category-wise totals for dashboard
