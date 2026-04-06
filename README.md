@@ -5,6 +5,16 @@ This project is a backend system for a finance dashboard that manages users, fin
 
 ---
 
+## 🌐 Live API
+
+Base URL:
+https://zorvyn-assignment-sushilkumar.onrender.com
+
+## 📘 API Docs
+https://zorvyn-assignment-sushilkumar.onrender.com/api-docs
+
+---
+
 ## Features
 
 ### Authentication & Authorization
@@ -12,6 +22,7 @@ This project is a backend system for a finance dashboard that manages users, fin
 - Role-based access control (RBAC)
 - Roles: ADMIN, ANALYST, VIEWER
 - Protected routes using middleware
+- Automatic admin seeding to ensure system usability
 
 ### User Management (Admin Only)
 - Create users
@@ -67,7 +78,7 @@ server.js
 
 ### 1. Clone Repository
 ```
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Sushilkumar5572/Zorvyn-Assignment.git
 cd your-repo-name
 ```
 
@@ -82,13 +93,22 @@ Create a `.env` file in the root:
 
 ```
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/financeDB
+MONGO_URI=your_mongodb_URI
 JWT_SECRET=your_secret_key
+ADMIN_EMAIL=your_admin_email
+ADMIN_PASSWORD=your_admin_password
 ```
+
+## Initial Admin Setup
+
+By design, all newly registered users are assigned the `VIEWER` role.  
+Only users with the `ADMIN` role are allowed to manage users and update roles.
+
+To avoid a locked system (where no admin exists), if no admin is found in the database. a default admin user is automatically created with the credientials you provide in .env file as mentioned above when the server starts.
 
 ### 4. Run Server
 ```
-npm run dev
+npm start
 ```
 
 Server will start at:
@@ -115,7 +135,7 @@ You can:
 ## API Endpoints
 
 ### Auth
-- POST /api/auth/register
+- POST /api/auth/register  (only user with VIEWER role)
 - POST /api/auth/login
 
 ### Users (Admin)

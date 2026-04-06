@@ -19,7 +19,11 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Welcome to the Financial Dashboard API' });
+  res.json({
+    success: true,
+    message: "Financial Dashboard API is running smoothly!",
+    documentation: `${req.protocol}://${req.get('host')}/api-docs`
+  });
 });
 
 app.use('/api/auth', authRoute);
