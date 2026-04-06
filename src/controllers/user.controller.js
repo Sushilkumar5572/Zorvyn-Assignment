@@ -31,6 +31,10 @@ export const updateUserDetails = asyncHandler(async (req, res) => {
 // Delete user
 export const deleteUserById = asyncHandler(async (req, res) => {
     const { id } = req.params;
+
+    if (id === req.user._id.toString()) {
+        return res.status(400).json({ message: 'You cannot delete your own account' });
+    }
     
     await deleteUser(id);
     res.status(200).json({ message: 'User deleted successfully' });
