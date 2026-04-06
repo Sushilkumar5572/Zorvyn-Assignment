@@ -1,6 +1,11 @@
 // Controller for dashboard-related operations
 import asyncHandler from '../utils/asyncHandler.js';
-import { getSummary } from '../services/dashboard.service.js';
+import {
+    getSummary,
+    getCategoryTotals,
+    getRecentRecords,
+    getMonthlyTrends
+} from '../services/dashboard.service.js';
 
 // Get summary of records for dashboard
 export const getSummaryController = asyncHandler(async (req, res) => {
@@ -18,7 +23,7 @@ export const getCategoryTotalsController = asyncHandler(async (req, res) => {
 
 // Get recent records for dashboard
 export const getRecentRecordsController = asyncHandler(async (req, res) => {
-    const records = await getCategoryTotals();
+    const records = await getRecentRecords();
 
     res.json(records);
 });

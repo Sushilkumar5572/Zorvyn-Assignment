@@ -16,22 +16,12 @@ const router = express.Router();
 
 router.use(authenticate);
 router.use(activeUser);
-router.use(authorize(ROLES.ADMIN));
+router.use(authorize([ROLES.ADMIN])); // Only Admin can manage users
 
-
-// Create new user (Admin only)
 router.post('/', createNewUser);
-
-// Get all users (Admin only)
 router.get('/', getUsers);
-
-// Update user Role or Status (Admin only)
 router.put('/:id', updateUserDetails);
-
-// Delete user (Admin only)
 router.delete('/:id', deleteUserById);
-
-// Get user by ID (Admin only)
 router.get('/:id', getUserDetails);
 
 export default router;

@@ -18,10 +18,10 @@ router.use(authenticate);
 router.use(activeUser);
 
 
-router.post('/', authorize([ROLES.ADMIN]), createRecordController);
-router.get('/', authorize([ROLES.ADMIN, ROLES.ANALYST]), getRecordsController);
-router.get('/:id', authorize([ROLES.ADMIN, ROLES.ANALYST]), getRecordByIdController);
-router.put('/:id', authorize([ROLES.ADMIN]), updateRecordController);
-router.delete('/:id', authorize([ROLES.ADMIN]), deleteRecordController);
+router.post('/', authorize([ROLES.ADMIN]), createRecordController); // Only Admin can create records
+router.get('/', authorize([ROLES.ADMIN, ROLES.ANALYST]), getRecordsController); // Admin and Analyst can view records
+router.get('/:id', authorize([ROLES.ADMIN, ROLES.ANALYST]), getRecordByIdController); // Admin and Analyst can view record details
+router.put('/:id', authorize([ROLES.ADMIN]), updateRecordController); // Only Admin can update records
+router.delete('/:id', authorize([ROLES.ADMIN]), deleteRecordController); // Only Admin can delete records
 
 export default router;

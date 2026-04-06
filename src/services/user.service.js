@@ -3,7 +3,7 @@ import User from '../models/User.model.js';
 import bcrypt from 'bcryptjs';
 
 export const createUser = async (userData) => {
-    const { name, email, password } = userData;
+    const { name, email, password, role } = userData;
 
     // Check if user already exists
     const existingUser = await User.findOne({ email });
@@ -15,9 +15,8 @@ export const createUser = async (userData) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const newUser = new User({ name, email, password: hashedPassword });
+    const newUser = new User({ name, email, password: hashedPassword, role });
     await newUser.save();
-
     return newUser;
 };
 

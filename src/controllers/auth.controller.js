@@ -3,14 +3,18 @@ import bcrypt from 'bcryptjs';
 import generateToken from '../utils/generateToken.js';
 import asyncHandler from '../utils/asyncHandler.js';
 import { createUser, getUserByEmail } from '../services/user.service.js';
+import { ROLES } from '../constants/role.constant.js';
 
+// Register new user as VIEWER by default
 export const register = asyncHandler(async (req, res) => {
 
+    req.body.role = ROLES.VIEWER; // Default role for new users
     const newUser = await createUser(req.body);
     res.status(201).json({ message: 'User registered successfully', user: newUser });
 
 });
 
+// Login user and return JWT token
 export const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 

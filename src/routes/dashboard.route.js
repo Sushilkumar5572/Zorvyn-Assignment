@@ -15,7 +15,7 @@ const router = express.Router();
 
 router.use(authenticate);
 router.use(activeUser);
-router.use(authorize(ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER));
+router.use(authorize([ROLES.ADMIN, ROLES.ANALYST, ROLES.VIEWER])); // All roles can access dashboard
 
 router.get('/summary', getSummaryController);
 router.get('/category-totals', getCategoryTotalsController);
