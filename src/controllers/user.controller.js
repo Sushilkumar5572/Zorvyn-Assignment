@@ -16,7 +16,7 @@ export const createNewUser = asyncHandler(async (req, res) => {
 // Get all users
 export const getUsers = asyncHandler(async (req, res) => {
     const users = await getAllUsers();
-    res.status(200).json(users);
+    res.status(200).json({ message: 'Users fetched successfully', users });
 });
 
 // Update user Role or Status
@@ -49,6 +49,6 @@ export const getUserDetails = asyncHandler(async (req, res) => {
         return res.status(404).json({ message: 'User not found' });
     }
 
-    res.status(200).json(user);
+    res.status(200).json({ message: 'User details fetched successfully', user });
 });
 
