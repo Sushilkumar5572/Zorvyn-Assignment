@@ -16,21 +16,22 @@ const router = express.Router();
 
 router.use(authenticate);
 router.use(activeUser);
+router.use(authorize(ROLES.ADMIN));
 
 
 // Create new user (Admin only)
-router.post('/', authorize([ROLES.ADMIN]), createNewUser);
+router.post('/', createNewUser);
 
 // Get all users (Admin only)
-router.get('/', authorize([ROLES.ADMIN]), getUsers);
+router.get('/', getUsers);
 
 // Update user Role or Status (Admin only)
-router.put('/:id', authorize([ROLES.ADMIN]), updateUserDetails);
+router.put('/:id', updateUserDetails);
 
 // Delete user (Admin only)
-router.delete('/:id', authorize([ROLES.ADMIN]), deleteUserById);
+router.delete('/:id', deleteUserById);
 
 // Get user by ID (Admin only)
-router.get('/:id', authorize([ROLES.ADMIN]), getUserDetails);
+router.get('/:id', getUserDetails);
 
 export default router;

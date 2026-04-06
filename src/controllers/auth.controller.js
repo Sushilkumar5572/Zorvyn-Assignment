@@ -14,6 +14,10 @@ export const register = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
+    if (!email || !password) {
+        return res.status(400).json({ message: 'Enter Email and Password' });
+    }
+
     // Find user by email
     const user = await getUserByEmail(email);
 

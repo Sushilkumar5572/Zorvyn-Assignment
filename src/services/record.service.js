@@ -8,8 +8,10 @@ const createRecord = async (recordData, userId) => {
 };
 
 // Get all records
-const getAllRecords = async (query) => {
-    return await Record.find(query);
+const getAllRecords = async (query, limit, page) => {
+    return await Record.find(query)
+        .skip((page - 1) * limit)
+        .limit(parseInt(limit));
 };
 
 // Get records by user ID
@@ -29,7 +31,7 @@ const updateRecord = async (id, updateData) => {
 
 // Delete a record by ID
 const deleteRecord = async (id) => {
-    await Record.findByIdAndDelete(id);
+    return await Record.findByIdAndDelete(id);
 };
 
 export {
@@ -39,4 +41,4 @@ export {
     getRecordById,
     updateRecord,
     deleteRecord
-}
+};
