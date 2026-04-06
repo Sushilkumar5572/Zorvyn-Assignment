@@ -8,10 +8,19 @@ const createRecord = async (recordData, userId) => {
 };
 
 // Get all records
-const getAllRecords = async (query, limit, page) => {
-    return await Record.find(query)
-        .skip((page - 1) * limit)
-        .limit(parseInt(limit));
+const getAllRecords = async (filters) => {
+    const query = {};
+
+    if (filters.type) query.type = filters.type;
+    if (filters.category) query.category = filters.category;
+
+    if (filters.from || filters.to) {
+        query.date = {};
+        if (filters.from) query.date.$gte = new Date(filters.from);
+        if (filters.to) query.date.$lte = new Date(filters.to);
+    }
+
+    return await Record.find(query);
 };
 
 // Get records by user ID
